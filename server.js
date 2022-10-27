@@ -20,9 +20,11 @@ var configDB = require('./config/database.js');
 var db
 
 // configuration ===============================================================
-mongoose.connect(configDB.url, (err, database) => {
+mongoose.connect(configDB.url, (err, client) => {
   if (err) return console.log(err)
-  db = database
+  // extracts client name 
+  // sends back data and grabs db
+  db = client.db
   require('./app/routes.js')(app, passport, db);
 }); // connect to our database
 
@@ -50,5 +52,5 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // launch ======================================================================
-app.listen(port);
-console.log('The magic happens on port ' + port);
+app.listen(8080),function(){
+console.log('The magic happens on port ' + 8080);}
